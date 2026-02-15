@@ -43,7 +43,10 @@ export const registerTools = (server: McpServer): void => {
             _meta: {
               ui: {
                 csp: {
-                  resourceDomains: ["https://cards.scryfall.io"],
+                  resourceDomains: [
+                    "https://cards.scryfall.io",
+                    "https://svgs.scryfall.io",
+                  ],
                 },
               },
             },

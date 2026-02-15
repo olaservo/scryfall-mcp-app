@@ -51,6 +51,28 @@ function capitalize(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+const SYMBOL_RE = /\{([^}]+)\}/g;
+const SPECIAL_SYMBOLS: Record<string, string> = {
+  "∞": "INFINITY",
+  "½": "HALF",
+};
+
+function symbolToFilename(symbol: string): string {
+  if (SPECIAL_SYMBOLS[symbol]) return SPECIAL_SYMBOLS[symbol];
+  return symbol.replace(/\//g, "");
+}
+
+function renderManaSymbols(text: string): string {
+  return text.replace(SYMBOL_RE, (_, symbol: string) => {
+    const filename = symbolToFilename(symbol);
+    return `<img class="mana-symbol" src="https://svgs.scryfall.io/card-symbols/${encodeURIComponent(filename)}.svg" alt="{${escapeHtml(symbol)}}" title="{${escapeHtml(symbol)}}" />`;
+  });
+}
+
+function renderOracleText(text: string): string {
+  return renderManaSymbols(escapeHtml(text));
+}
+
 function showLoading() {
   loadingEl.style.display = "flex";
   errorEl.style.display = "none";
@@ -118,8 +140,8 @@ function renderFaceDetails(
     ${separator}
     <h2 class="card-name">${escapeHtml(face.name || "Unknown")}${faceLabel}</h2>
     <p class="card-type">${escapeHtml(face.type_line || "")}</p>
-    ${face.mana_cost ? `<p class="card-mana">${escapeHtml(face.mana_cost)}</p>` : ""}
-    ${face.oracle_text ? `<div class="card-oracle">${escapeHtml(face.oracle_text)}</div>` : ""}
+    ${face.mana_cost ? `<p class="card-mana">${renderManaSymbols(face.mana_cost)}</p>` : ""}
+    ${face.oracle_text ? `<div class="card-oracle">${renderOracleText(face.oracle_text)}</div>` : ""}
   `;
 }
 
@@ -155,8 +177,8 @@ function renderCard(card: CardData): string {
     detailsHtml = `
       <h2 class="card-name">${escapeHtml(card.name)}</h2>
       <p class="card-type">${escapeHtml(card.type_line)}</p>
-      ${card.mana_cost ? `<p class="card-mana">${escapeHtml(card.mana_cost)}</p>` : ""}
-      ${card.oracle_text ? `<div class="card-oracle">${escapeHtml(card.oracle_text)}</div>` : ""}
+      ${card.mana_cost ? `<p class="card-mana">${renderManaSymbols(card.mana_cost)}</p>` : ""}
+      ${card.oracle_text ? `<div class="card-oracle">${renderOracleText(card.oracle_text)}</div>` : ""}
     `;
   }
 

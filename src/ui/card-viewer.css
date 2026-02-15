@@ -106,6 +106,26 @@ html, body {
   font-size: var(--font-text-sm-size, 0.9rem);
   font-weight: var(--font-weight-semibold, 600);
   margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+/* Mana symbols */
+.mana-symbol {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+.card-mana .mana-symbol {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.card-oracle .mana-symbol {
+  width: 1em;
+  height: 1em;
 }
 
 .card-oracle {
