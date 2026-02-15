@@ -10,6 +10,7 @@ const server = new McpServer(
   {
     capabilities: {
       tools: {},
+      resources: {},
     },
     instructions:
       "Search and fetch Magic: The Gathering card data from Scryfall. " +

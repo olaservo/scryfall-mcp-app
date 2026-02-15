@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Scryfall Card Viewer</title>
+  <link rel="stylesheet" href="./card-viewer.css">
+</head>
+<body>
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading card...</p>
+  </div>
+
+  <div id="error" class="error" style="display: none;"></div>
+
+  <div id="card" class="card-container" style="display: none;"></div>
+
+  <script type="module" src="./card-viewer.ts"></script>
+</body>
+</html>

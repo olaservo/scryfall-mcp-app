@@ -8,18 +8,24 @@
     "scryfall-mcp-server": "dist/index.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build:ui": "cross-env INPUT=src/ui/card-viewer.html vite build",
+    "build:server": "tsc",
+    "build": "npm run build:ui && npm run build:server",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "inspector": "npx @modelcontextprotocol/inspector node dist/index.js"
   },
   "dependencies": {
+    "@modelcontextprotocol/ext-apps": "^1.0.1",
     "@modelcontextprotocol/sdk": "^1.24.3",
     "zod": "^3.25.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
+    "cross-env": "^10.1.0",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vite": "^7.3.1",
+    "vite-plugin-singlefile": "^2.3.0"
   }
 }
