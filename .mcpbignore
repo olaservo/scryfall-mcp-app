@@ -1,0 +1,7 @@
+/src/
+vite.config.ts
+/.claude/
+/.github/
+/README.md
+/screenshots/
+*.mcpb

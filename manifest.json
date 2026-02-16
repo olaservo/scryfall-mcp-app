@@ -1,0 +1,41 @@
+{
+  "manifest_version": "0.3",
+  "name": "scryfall-mcp-server",
+  "display_name": "Scryfall MTG Card Search",
+  "version": "1.0.0",
+  "description": "Search and fetch Magic: The Gathering card data from Scryfall with a rich card viewer UI",
+  "author": {
+    "name": "olaservo",
+    "url": "https://github.com/olaservo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olaservo/scryfall-mcp-app"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"]
+    }
+  },
+  "tools": [
+    {
+      "name": "search",
+      "description": "Search for Magic: The Gathering cards using Scryfall query syntax"
+    },
+    {
+      "name": "fetch",
+      "description": "Fetch detailed card information by Scryfall UUID"
+    }
+  ],
+  "keywords": ["magic-the-gathering", "mtg", "scryfall", "cards", "search"],
+  "license": "MIT",
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}
