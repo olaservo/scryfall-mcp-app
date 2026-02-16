@@ -1,16 +1,39 @@
 {
-  "name": "scryfall-mcp-server",
+  "name": "@olaservo/scryfall-mcp-server",
   "version": "1.0.0",
-  "description": "Local MCP server for searching and fetching Magic: The Gathering cards from Scryfall",
+  "description": "Community MCP server to search and fetch Magic: The Gathering card data from Scryfall with a rich card viewer UI. Not affiliated with or endorsed by Scryfall.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "scryfall-mcp-server": "dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "magic-the-gathering",
+    "mtg",
+    "scryfall",
+    "cards",
+    "search",
+    "claude"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olaservo/scryfall-mcp-app.git"
+  },
+  "homepage": "https://github.com/olaservo/scryfall-mcp-app#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "build:ui": "cross-env INPUT=src/ui/card-viewer.html vite build",
     "build:server": "tsc",
     "build": "npm run build:ui && npm run build:server",
+    "prepublishOnly": "npm run build",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "inspector": "npx @modelcontextprotocol/inspector node dist/index.js",
