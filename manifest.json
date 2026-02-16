@@ -3,7 +3,7 @@
   "name": "scryfall-mcp-server",
   "display_name": "Scryfall MTG Card Search",
   "version": "1.0.0",
-  "description": "Search and fetch Magic: The Gathering card data from Scryfall with a rich card viewer UI",
+  "description": "Community MCP server to search and fetch Magic: The Gathering card data from Scryfall with a rich card viewer UI. Not affiliated with or endorsed by Scryfall.",
   "author": {
     "name": "olaservo",
     "url": "https://github.com/olaservo"
@@ -12,6 +12,7 @@
     "type": "git",
     "url": "https://github.com/olaservo/scryfall-mcp-app"
   },
+  "icon": "icon.png",
   "server": {
     "type": "node",
     "entry_point": "dist/index.js",
