@@ -1,6 +1,6 @@
 {
   "name": "@olaservo/scryfall-mcp-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Community MCP server to search and fetch Magic: The Gathering card data from Scryfall with a rich card viewer UI. Not affiliated with or endorsed by Scryfall.",
   "type": "module",
   "main": "dist/index.js",
