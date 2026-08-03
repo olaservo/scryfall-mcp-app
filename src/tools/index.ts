@@ -1,8 +1,6 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import {
-  registerAppResource,
-  RESOURCE_MIME_TYPE,
-} from "@modelcontextprotocol/ext-apps/server";
+import type { ReadResourceResult } from "@modelcontextprotocol/server";
+import { McpServer } from "@modelcontextprotocol/server";
+import { registerAppResource, RESOURCE_MIME_TYPE } from "../ui-meta.js";
 import { registerSearchTool } from "./search.js";
 import { registerFetchTool, CARD_VIEWER_URI } from "./fetch.js";
 import fs from "node:fs/promises";
@@ -28,7 +26,7 @@ export const registerTools = (server: McpServer): void => {
     CARD_VIEWER_URI,
     CARD_VIEWER_URI,
     { mimeType: RESOURCE_MIME_TYPE },
-    async () => {
+    async (): Promise<ReadResourceResult> => {
       const distDir = getDistDir();
       const html = await fs.readFile(
         path.join(distDir, "card-viewer.html"),

@@ -1,24 +1,24 @@
 import express from "express";
 import cors from "cors";
 import { randomUUID } from "node:crypto";
-import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
-import { isInitializeRequest } from "@modelcontextprotocol/sdk/types.js";
+import { isInitializeRequest } from "@modelcontextprotocol/server";
+import { NodeStreamableHTTPServerTransport } from "@modelcontextprotocol/node";
 import { createServer } from "../server.js";
 
 const app = express();
 app.use(cors({ origin: "*", exposedHeaders: ["Mcp-Session-Id"] }));
 app.use(express.json());
 
-const transports: Record<string, StreamableHTTPServerTransport> = {};
+const transports: Record<string, NodeStreamableHTTPServerTransport> = {};
 
 app.post("/mcp", async (req, res) => {
   const sessionId = req.headers["mcp-session-id"] as string | undefined;
-  let transport: StreamableHTTPServerTransport;
+  let transport: NodeStreamableHTTPServerTransport;
 
   if (sessionId && transports[sessionId]) {
     transport = transports[sessionId];
   } else if (!sessionId && isInitializeRequest(req.body)) {
-    transport = new StreamableHTTPServerTransport({
+    transport = new NodeStreamableHTTPServerTransport({
       sessionIdGenerator: () => randomUUID(),
       onsessioninitialized: (id) => {
         transports[id] = transport;

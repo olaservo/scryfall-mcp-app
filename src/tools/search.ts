@@ -1,4 +1,5 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { CallToolResult } from "@modelcontextprotocol/server";
+import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 import { searchCards, isScryfallError } from "../scryfall-api.js";
 
@@ -30,8 +31,7 @@ export const registerSearchTool = (server: McpServer) => {
         openWorldHint: true,
       },
     },
-    async (args) => {
-      const { query } = SearchSchema.parse(args);
+    async ({ query }): Promise<CallToolResult> => {
       const result = await searchCards(query);
 
       if (isScryfallError(result)) {
