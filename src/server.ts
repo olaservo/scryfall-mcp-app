@@ -1,11 +1,11 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpServer } from "@modelcontextprotocol/server";
 import { registerTools } from "./tools/index.js";
 
 export function createServer(): McpServer {
   const server = new McpServer(
     {
       name: "scryfall-mcp-server",
-      version: "1.0.0",
+      version: "2.0.0",
     },
     {
       capabilities: {

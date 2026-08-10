@@ -1,18 +1,16 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { CallToolResult } from "@modelcontextprotocol/server";
+import { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 import { fetchCard, isScryfallError, ScryfallCard } from "../scryfall-api.js";
-import { registerAppTool } from "@modelcontextprotocol/ext-apps/server";
+import { registerAppTool } from "../ui-meta.js";
 
 export const CARD_VIEWER_URI = "ui://scryfall/card-viewer.html";
 
-const FetchInputShape = {
+const FetchSchema = z.object({
   id: z
-    .string()
     .uuid()
     .describe("Scryfall card UUID (obtained from the search tool results)"),
-};
-
-const FetchSchema = z.object(FetchInputShape);
+});
 
 function formatCardText(card: ScryfallCard): string {
   const parts: string[] = [];
@@ -73,7 +71,7 @@ export const registerFetchTool = (server: McpServer) => {
         "Fetch detailed information for a single Magic: The Gathering card by its Scryfall UUID. " +
         "Returns the card's full oracle text, type line, mana cost, colors, set info, rarity, " +
         "prices, and image URIs. Handles double-faced cards (e.g., transform, modal DFC).",
-      inputSchema: FetchInputShape,
+      inputSchema: FetchSchema,
       annotations: {
         readOnlyHint: true,
         destructiveHint: false,
@@ -84,8 +82,7 @@ export const registerFetchTool = (server: McpServer) => {
         ui: { resourceUri: CARD_VIEWER_URI },
       },
     },
-    async (args) => {
-      const { id } = FetchSchema.parse(args);
+    async ({ id }): Promise<CallToolResult> => {
       const result = await fetchCard(id);
 
       if (isScryfallError(result)) {

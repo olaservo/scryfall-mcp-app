@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "scryfall-mcp-server",
   "display_name": "Scryfall MTG Card Search",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Community MCP server to search and fetch Magic: The Gathering card data from Scryfall with a rich card viewer UI. Not affiliated with or endorsed by Scryfall.",
   "author": {
     "name": "olaservo",
@@ -36,7 +36,7 @@
   "compatibility": {
     "platforms": ["darwin", "win32", "linux"],
     "runtimes": {
-      "node": ">=18.0.0"
+      "node": ">=20.0.0"
     }
   }
 }
