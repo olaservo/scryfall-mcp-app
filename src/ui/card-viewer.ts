@@ -3,6 +3,7 @@ import {
   applyDocumentTheme,
   applyHostStyleVariables,
   applyHostFonts,
+  type McpUiHostContext,
 } from "@modelcontextprotocol/ext-apps";
 
 // Types matching structuredContent from the fetch tool
@@ -256,14 +257,7 @@ app.onerror = (err) => {
   showError(err instanceof Error ? err.message : String(err));
 };
 
-function handleHostContextChanged(ctx: {
-  theme?: string;
-  styles?: {
-    variables?: Record<string, string>;
-    css?: { fonts?: string };
-  };
-  safeAreaInsets?: { top: number; right: number; bottom: number; left: number };
-}) {
+function handleHostContextChanged(ctx: McpUiHostContext) {
   if (ctx.theme) {
     applyDocumentTheme(ctx.theme);
   }
