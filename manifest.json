@@ -29,6 +29,18 @@
     {
       "name": "fetch",
       "description": "Fetch detailed card information by Scryfall UUID"
+    },
+    {
+      "name": "get_rule",
+      "description": "Look up the Comprehensive Rules by rule number, with citations"
+    },
+    {
+      "name": "search_rules",
+      "description": "Search the Comprehensive Rules and glossary, with citations"
+    },
+    {
+      "name": "get_rulings",
+      "description": "Get a card's Oracle text and rulings, with citations"
     }
   ],
   "keywords": ["magic-the-gathering", "mtg", "scryfall", "cards", "search"],

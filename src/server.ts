@@ -15,7 +15,10 @@ export function createServer(): McpServer {
       instructions:
         "Search and fetch Magic: The Gathering card data from Scryfall. " +
         "Use the 'search' tool with Scryfall full-text query syntax to find cards, " +
-        "then use 'fetch' with a card ID to get full details.",
+        "then use 'fetch' with a card ID to get full details. " +
+        "For rules questions, use 'get_rule' and 'search_rules' for the Comprehensive Rules " +
+        "and 'get_rulings' for a card's Oracle text and rulings. " +
+        "Cite them with the [cN] markers and links they return, and give the rules' effective date.",
     },
   );
 

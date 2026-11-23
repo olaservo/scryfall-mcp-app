@@ -10,6 +10,9 @@ A community MCP server for searching and fetching Magic: The Gathering card data
 
 - **search** — Search for cards using [Scryfall full-text syntax](https://scryfall.com/docs/syntax) (e.g., `c:red t:creature cmc=3`, `set:mkm`, `o:"draw a card"`)
 - **fetch** — Fetch full card details by Scryfall UUID. In MCP App-capable hosts, renders a card viewer UI with the card image, mana cost icons, oracle text, set info, rarity, and prices.
+- **get_rule** — Look up the [Comprehensive Rules](https://magic.wizards.com/en/rules) by rule number: one subrule (`702.19b`), a rule and its subrules (`702.19`), or a section's contents (`702`)
+- **search_rules** — Search the Comprehensive Rules and their glossary by keyword
+- **get_rulings** — Get a card's Oracle text and its rulings, by Scryfall UUID or name
 
 ## Installation
 
@@ -70,3 +73,14 @@ The server uses the [MCP Apps extension](https://github.com/modelcontextprotocol
 - The UI renders the card image, Scryfall mana symbol SVGs in the mana cost and oracle text, and card metadata
 - CSP is configured to allow images from `cards.scryfall.io` and SVGs from `svgs.scryfall.io`
 - Non-UI hosts receive the text fallback with all card details
+
+## Rules and citations
+
+The rules tools read the Comprehensive Rules text file that Wizards of the Coast links from [magic.wizards.com/en/rules](https://magic.wizards.com/en/rules). The server finds the file on the first rules call and checks the page for a new release once a day. If that check fails, it keeps serving the copy it has. Set `MTG_CR_URL` to use a specific file instead.
+
+Every answer from `get_rule` and `search_rules` states the effective date of the rules it came from. Answers from all three rules tools carry citations in the format of [citation-audit-demo](https://github.com/olaservo/citation-audit-demo):
+
+- The text has a `[cN]` marker after each quoted rule or ruling, and a link definition for each marker at the end.
+- For a client that declares the `io.modelcontextprotocol/citations` extension capability, `_meta["io.modelcontextprotocol/citations"]` has one [SEP-3094](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3094) citation per marker: name, URL, the quoted text, publisher, and the rules' effective date or the ruling's date.
+
+Rules citations link the dated rules file. Card citations link the card's Scryfall page.

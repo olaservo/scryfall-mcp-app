@@ -3,6 +3,8 @@ import { McpServer } from "@modelcontextprotocol/server";
 import { registerAppResource, RESOURCE_MIME_TYPE } from "../ui-meta.js";
 import { registerSearchTool } from "./search.js";
 import { registerFetchTool, CARD_VIEWER_URI } from "./fetch.js";
+import { registerRulesTools } from "./rules.js";
+import { registerRulingsTool } from "./rulings.js";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -20,6 +22,8 @@ function getDistDir(): string {
 export const registerTools = (server: McpServer): void => {
   registerSearchTool(server);
   registerFetchTool(server);
+  registerRulesTools(server);
+  registerRulingsTool(server);
 
   registerAppResource(
     server,

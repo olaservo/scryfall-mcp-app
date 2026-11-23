@@ -1,5 +1,5 @@
 const BASE_URL = "https://api.scryfall.com";
-const USER_AGENT = "scryfall-mcp-server/1.0 (+https://github.com/olaservo/scryfall-mcp-app)";
+export const USER_AGENT ="scryfall-mcp-server/1.0 (+https://github.com/olaservo/scryfall-mcp-app)";
 const MIN_DELAY_MS = 120; // ~8-9 rps (Scryfall asks for 50-100ms & <10 rps)
 
 let lastCall = 0;
@@ -22,6 +22,7 @@ function headers(): Record<string, string> {
 
 export interface ScryfallCard {
   id: string;
+  oracle_id?: string;
   name: string;
   scryfall_uri: string;
   set: string;
@@ -56,8 +57,16 @@ export interface ScryfallError {
   body: string;
 }
 
-export function isScryfallError(
-  result: ScryfallSearchResponse | ScryfallCard | ScryfallError,
+export interface ScryfallRuling {
+  oracle_id: string;
+  /** "wotc" for Wizards of the Coast, "scryfall" for Scryfall's own notes. */
+  source: "wotc" | "scryfall";
+  published_at: string;
+  comment: string;
+}
+
+export function isScryfallError<T extends object>(
+  result: T | ScryfallError,
 ): result is ScryfallError {
   return "status" in result && "body" in result;
 }
@@ -87,4 +96,31 @@ export async function fetchCard(
     return { status: res.status, body: await res.text() };
   }
   return (await res.json()) as ScryfallCard;
+}
+
+export async function fetchCardByName(
+  name: string,
+): Promise<ScryfallCard | ScryfallError> {
+  await rateLimit();
+  const url = new URL(`${BASE_URL}/cards/named`);
+  url.searchParams.set("fuzzy", name);
+
+  const res = await fetch(url.toString(), { headers: headers() });
+  if (!res.ok) {
+    return { status: res.status, body: await res.text() };
+  }
+  return (await res.json()) as ScryfallCard;
+}
+
+export async function fetchRulings(
+  id: string,
+): Promise<ScryfallRuling[] | ScryfallError> {
+  await rateLimit();
+  const url = `${BASE_URL}/cards/${encodeURIComponent(id)}/rulings`;
+
+  const res = await fetch(url, { headers: headers() });
+  if (!res.ok) {
+    return { status: res.status, body: await res.text() };
+  }
+  return ((await res.json()) as { data: ScryfallRuling[] }).data;
 }
