@@ -5,7 +5,7 @@ export function createServer(): McpServer {
   const server = new McpServer(
     {
       name: "scryfall-mcp-server",
-      version: "2.0.0",
+      version: "2.1.0",
     },
     {
       capabilities: {
