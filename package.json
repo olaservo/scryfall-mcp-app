@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/olaservo/scryfall-mcp-app#readme",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "build:ui": "cross-env INPUT=src/ui/card-viewer.html vite build",
@@ -55,7 +55,7 @@
     "@modelcontextprotocol/sdk": "^1.30.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-    "@types/node": "^22.10.0",
+    "@types/node": "^24.19.2",
     "cross-env": "^10.1.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
