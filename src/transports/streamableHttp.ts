@@ -3,6 +3,7 @@ import cors from "cors";
 import { randomUUID } from "node:crypto";
 import { isInitializeRequest } from "@modelcontextprotocol/server";
 import { NodeStreamableHTTPServerTransport } from "@modelcontextprotocol/node";
+import { readCardViewerHtml } from "../card-viewer-file.js";
 import { createServer } from "../server.js";
 
 const app = express();
@@ -31,7 +32,7 @@ app.post("/mcp", async (req, res) => {
       }
     };
 
-    const server = createServer();
+    const server = createServer({ cardViewerHtml: readCardViewerHtml });
     await server.connect(transport);
   } else {
     res.status(400).json({

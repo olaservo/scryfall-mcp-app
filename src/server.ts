@@ -1,7 +1,12 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { registerTools } from "./tools/index.js";
 
-export function createServer(): McpServer {
+export interface ServerOptions {
+  /** Returns the card viewer's HTML. The Node transports read it from dist/; a host with no file system passes its own. */
+  cardViewerHtml: () => Promise<string>;
+}
+
+export function createServer(options: ServerOptions): McpServer {
   const server = new McpServer(
     {
       name: "scryfall-mcp-server",
@@ -22,7 +27,7 @@ export function createServer(): McpServer {
     },
   );
 
-  registerTools(server);
+  registerTools(server, options.cardViewerHtml);
 
   return server;
 }
