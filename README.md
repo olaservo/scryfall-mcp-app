@@ -55,6 +55,10 @@ Then add to your `claude_desktop_config.json`:
 }
 ```
 
+### Option 4: Remote, behind Google sign-in
+
+`worker/` is a Cloudflare Worker that serves the same tools over HTTP to an allow-list of Google accounts. See [docs/remote.md](docs/remote.md).
+
 ## Development
 
 ```bash

@@ -1,0 +1,32 @@
+// Cloudflare Workers config for the remote endpoint behind Google sign-in.
+// Copy to wrangler.jsonc, which is not committed, and fill in the host name and the KV namespace id; see docs/remote.md.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "scryfall-mcp",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // The card viewer is built into dist/ by `npm run build:ui` in the repo root and bundled as text.
+  "rules": [
+    {
+      "type": "Text",
+      "globs": ["**/*.html"],
+      "fallthrough": true
+    }
+  ],
+  "vars": {
+    "MCP_RESOURCE_URL": "https://scryfall-mcp.<account>.workers.dev/mcp"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "OAUTH_KV",
+      "id": "<kv namespace id>"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "dev": {
+    "port": 8789
+  }
+}

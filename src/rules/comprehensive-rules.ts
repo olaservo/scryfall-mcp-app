@@ -112,7 +112,7 @@ async function discoverUrl(): Promise<string> {
 
 function decode(bytes: ArrayBuffer): string {
   try {
-    return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+    return new TextDecoder("utf-8", { fatal: true, ignoreBOM: false }).decode(bytes);
   } catch {
     // Older releases were Windows-1252.
     return new TextDecoder("windows-1252").decode(bytes);

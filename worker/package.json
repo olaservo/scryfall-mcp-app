@@ -1,0 +1,22 @@
+{
+  "name": "@olaservo/scryfall-mcp-worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cloudflare Worker that serves scryfall-mcp-server over HTTP behind Google sign-in.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "typecheck": "wrangler types && tsc --noEmit",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "@cloudflare/workers-oauth-provider": "^1.1.0",
+    "hono": "^4.12.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "wrangler": "^4.160.0"
+  }
+}
