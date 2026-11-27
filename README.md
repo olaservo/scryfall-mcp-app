@@ -81,6 +81,6 @@ The rules tools read the Comprehensive Rules text file that Wizards of the Coast
 Every answer from `get_rule` and `search_rules` states the effective date of the rules it came from. Answers from all three rules tools carry citations in the format of [citation-audit-demo](https://github.com/olaservo/citation-audit-demo):
 
 - The text has a `[cN]` marker after each quoted rule or ruling, and a link definition for each marker at the end.
-- For a client that declares the `io.modelcontextprotocol/citations` extension capability, `_meta["io.modelcontextprotocol/citations"]` has one [SEP-3094](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3094) citation per marker: name, URL, the quoted text, publisher, and the rules' effective date or the ruling's date.
+- For a client that declares the `io.github.olaservo/citations` extension capability, `_meta["io.github.olaservo/citations"]` has one [SEP-3094](https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3094) citation per marker: name, URL, the quoted text, publisher, and the rules' effective date or the ruling's date.
 
 Rules citations link the dated rules file. Card citations link the card's Scryfall page.

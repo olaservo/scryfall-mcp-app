@@ -9,7 +9,9 @@ import {
   type ServerContext,
 } from "@modelcontextprotocol/server";
 
-export const CITATIONS_EXTENSION = "io.modelcontextprotocol/citations";
+// A stand-in under the author's own prefix, matching citation-audit-demo, until a
+// working group names the extension. `io.modelcontextprotocol/` is reserved for MCP.
+export const CITATIONS_EXTENSION = "io.github.olaservo/citations";
 
 type Party = { type: "Organization"; name: string };
 
